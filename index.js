@@ -2,28 +2,43 @@ let current = 0
 let next = 1
 let fibonumbers = []
 let productsArray =[]
+let factorsArray = []
 
-
-
-for (let i = 0; i < 40; i++){
+for (let i = 0; i < 10; i++){
         fibonumber = next + current
         current = next
         next = fibonumber
         fibonumbers.push(fibonumber)
+
+
         productsArray.push(fibonumber*current)
-    
+        factorsArray.push(fibonumber , current)
 }
 
-function productFib(prod){
+function productFib(prod) {
     let productPositionOnProductsArray = productsArray.indexOf(prod)
-    if (productPositionOnProductsArray == -1){
-        return false
-    }
-    else{
-        return true
+    let firstFactor = factorsArray[productPositionOnProductsArray * 2]
+    let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
 
+    if (productPositionOnProductsArray == -1) {
+        return ([secondFactor, firstFactor, false])
     }
-    
+    else {
+
+
+        return ([secondFactor, firstFactor, true])
+    }
 }
-let prod = 4895
-console.log(productFib(prod))
+
+function FindNearestNumberOnArray(number, array){
+    let currentNearestNumber = 0
+    for(let element of array){
+        if (Math.abs(element - number) < Math.abs(currentNearestNumber - number)  ){
+            currentNearestNumber = element
+        }
+    }
+    return currentNearestNumber
+}
+
+console.log(productsArray)
+console.log(FindNearestNumberOnArray(16, productsArray))
