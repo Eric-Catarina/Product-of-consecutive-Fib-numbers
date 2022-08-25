@@ -49,10 +49,6 @@ function GetProductsOfFiboNumber(fibonumber, isValid){
     let firstFactor = factorsArray[productPositionOnProductsArray * 2]
     let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
 
-    let firstFactorIsValid = factorsArray[productPositionOnProductsArrayIsValid * 2 ]
-    let secondFactorIsValid = factorsArray[(productPositionOnProductsArrayIsValid * 2 + 1) ]
-
-
    
     if (isValid){
         return [secondFactor, firstFactor]
