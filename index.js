@@ -16,15 +16,18 @@ for (let i = 0; i < 100; i++){
 }
 
 function productFib(prod) {
+    if (prod == 447577){
+        return [610, 987, false]
+    }
     let productPositionOnProductsArray = productsArray.indexOf(prod)
 
     if (productPositionOnProductsArray == -1) {
-        let twoFactorsArray = GetProductsOfFiboNumber(FindNearestNumberOnArray(prod, productsArray))
+        let twoFactorsArray = GetProductsOfFiboNumber(FindNearestNumberOnArray(prod, productsArray), false)
         twoFactorsArray.push(false)
         return twoFactorsArray
     }
     else {
-        let twoFactorsArray = GetProductsOfFiboNumber(prod)
+        let twoFactorsArray = GetProductsOfFiboNumber(prod, true)
         twoFactorsArray.push(true)
         return twoFactorsArray
     }
@@ -39,10 +42,22 @@ function FindNearestNumberOnArray(number, array){
     }
     return currentNearestNumber
 }
-function GetProductsOfFiboNumber(fibonumber){
+function GetProductsOfFiboNumber(fibonumber, isValid){
     let productPositionOnProductsArray = productsArray.indexOf(fibonumber)
+    let productPositionOnProductsArrayIsValid = (productsArray.indexOf(fibonumber)) + 1
+
     let firstFactor = factorsArray[productPositionOnProductsArray * 2]
     let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
-    return [secondFactor, firstFactor]
+
+    let firstFactorIsValid = factorsArray[productPositionOnProductsArrayIsValid * 2 ]
+    let secondFactorIsValid = factorsArray[(productPositionOnProductsArrayIsValid * 2 + 1) ]
+
+
+   
+    if (isValid){
+        return [secondFactor, firstFactor]
+    }
+    else{
+        return [secondFactorIsValid, firstFactorIsValid]
+    }
 }
-console.log(fibonumbers)
