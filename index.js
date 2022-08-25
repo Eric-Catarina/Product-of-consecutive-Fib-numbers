@@ -57,7 +57,4 @@ function GetProductsOfFiboNumber(fibonumber, isValid){
     if (isValid){
         return [secondFactor, firstFactor]
     }
-    else{
-        return [secondFactorIsValid, firstFactorIsValid]
-    }
 }
