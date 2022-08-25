@@ -4,7 +4,7 @@ let fibonumbers = []
 let productsArray =[]
 let factorsArray = []
 
-for (let i = 0; i < 10; i++){
+for (let i = 0; i < 100; i++){
         fibonumber = next + current
         current = next
         next = fibonumber
@@ -17,16 +17,16 @@ for (let i = 0; i < 10; i++){
 
 function productFib(prod) {
     let productPositionOnProductsArray = productsArray.indexOf(prod)
-    let firstFactor = factorsArray[productPositionOnProductsArray * 2]
-    let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
 
     if (productPositionOnProductsArray == -1) {
-        return ([secondFactor, firstFactor, false])
+        let twoFactorsArray = GetProductsOfFiboNumber(FindNearestNumberOnArray(prod, productsArray))
+        twoFactorsArray.push(false)
+        return twoFactorsArray
     }
     else {
-
-
-        return ([secondFactor, firstFactor, true])
+        let twoFactorsArray = GetProductsOfFiboNumber(prod)
+        twoFactorsArray.push(true)
+        return twoFactorsArray
     }
 }
 
@@ -39,6 +39,10 @@ function FindNearestNumberOnArray(number, array){
     }
     return currentNearestNumber
 }
-
-console.log(productsArray)
-console.log(FindNearestNumberOnArray(16, productsArray))
+function GetProductsOfFiboNumber(fibonumber){
+    let productPositionOnProductsArray = productsArray.indexOf(fibonumber)
+    let firstFactor = factorsArray[productPositionOnProductsArray * 2]
+    let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
+    return [secondFactor, firstFactor]
+}
+console.log(fibonumbers)
