@@ -4,7 +4,12 @@ let fibonumbers = []
 let productsArray = []
 let factorsArray = []
 let fibonumber
-let factorsArrayWithProd = productsArray
+
+let count = 0
+
+function CompareNumbers(a, b) {
+    return a - b
+}
 
 
 for (let i = 0; i < 30; i++) {
@@ -16,23 +21,33 @@ for (let i = 0; i < 30; i++) {
     productsArray.push(fibonumber * current)
     factorsArray.push(fibonumber, current)
 }
+let factorsArrayWithProd = productsArray
+
 
 function ReturnTheTwoFactorsOfFalseNumber(number) {
 
-    function CompareNumbers(a, b) {
-        return a - b
-    }
+   
 
     factorsArrayWithProd = productsArray
     factorsArrayWithProd.push(number)
+
+    console.log("Antes do Sort: " + factorsArrayWithProd)
+
     factorsArrayWithProd.sort(CompareNumbers)
+
+    console.log("Depois do Sort: " + factorsArrayWithProd)
+
 
     
     let indexOfTheProduct = factorsArrayWithProd.indexOf(number)
-    let firstFactor_ = (factorsArray[2 * indexOfTheProduct] - 1)
-    let secondFactor_ = (factorsArray[(2 * indexOfTheProduct) ])
+    let firstFactor = (factorsArray[2 * indexOfTheProduct] )
+    let secondFactor = (factorsArray[(2 * indexOfTheProduct) + 1 ])
 
-    return [secondFactor_, firstFactor_, false]
+   
+        return [secondFactor, firstFactor, false]
+
+    
+
 }
 
 function ReturnTwoFactorsOfTrueNumber(number) {
@@ -46,18 +61,18 @@ function ReturnTwoFactorsOfTrueNumber(number) {
 
 function productFib(prod) {
     if (productsArray.includes(prod)) {
+
         return ReturnTwoFactorsOfTrueNumber(prod)
     }
-    else {
-        return ReturnTheTwoFactorsOfFalseNumber(prod)
+    else if(!(productsArray.includes(prod))) {
+        result = ReturnTheTwoFactorsOfFalseNumber(prod)
+        count ++
+
+        return result
     }
 }
 
-console.log(productFib(4895))
-console.log(productFib(5895))
-console.log(productFib(74049690))
-console.log(productFib(84049690))
-console.log(productFib(193864606))
-console.log(productFib(447577))
-console.log(productFib(602070))
+
+
+
   
