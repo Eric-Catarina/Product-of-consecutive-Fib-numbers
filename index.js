@@ -1,56 +1,49 @@
 let current = 0
 let next = 1
 let fibonumbers = []
-let productsArray =[]
+let productsArray = []
 let factorsArray = []
+let fibonumber
 
-for (let i = 0; i < 100; i++){
-        fibonumber = next + current
-        current = next
-        next = fibonumber
-        fibonumbers.push(fibonumber)
+for (let i = 0; i < 150; i++) {
+  fibonumber = next + current
+  current = next
+  next = fibonumber
+  fibonumbers.push(fibonumber)
 
-
-        productsArray.push(fibonumber*current)
-        factorsArray.push(fibonumber , current)
+  productsArray.push(fibonumber * current)
+  factorsArray.push(fibonumber, current)
 }
 
+function ReturnTheTwoFactorsOfFalseNumber(number) {
+  function CompareNumbers(a, b) {
+    return a - b
+  }
+  
+  let factorsArrayWithProd = productsArray
+  factorsArrayWithProd.push(number)
+  factorsArrayWithProd.sort(CompareNumbers)
+  let indexOfTheProduct = factorsArrayWithProd.indexOf(number)
+  let firstFactor = (factorsArray[2*indexOfTheProduct])
+  let secondFactor = (factorsArray[(2*indexOfTheProduct) + 1]) 
+
+  return [secondFactor, firstFactor, false]
+}
+
+function ReturnTwoFactorsOfTrueNumber(number){
+let indexOfTheProduct = productsArray.indexOf(number)
+  
+let firstFactor = factorsArray[(indexOfTheProduct*2)]
+let secondFactor = factorsArray[(indexOfTheProduct*2) + 1]
+
+return [secondFactor, firstFactor, true]
+}
 function productFib(prod) {
-    if (prod == 447577){
-        return [610, 987, false]
-    }
-    let productPositionOnProductsArray = productsArray.indexOf(prod)
-
-    if (productPositionOnProductsArray == -1) {
-        let twoFactorsArray = GetProductsOfFiboNumber(FindNearestNumberOnArray(prod, productsArray), false)
-        twoFactorsArray.push(false)
-        return twoFactorsArray
-    }
-    else {
-        let twoFactorsArray = GetProductsOfFiboNumber(prod, true)
-        twoFactorsArray.push(true)
-        return twoFactorsArray
-    }
+  if (productsArray.includes(prod)){
+    return ReturnTwoFactorsOfTrueNumber(prod)
+  }
+  else{
+    return ReturnTheTwoFactorsOfFalseNumber(prod)
+  }
 }
 
-function FindNearestNumberOnArray(number, array){
-    let currentNearestNumber = 0
-    for(let element of array){
-        if (Math.abs(element - number) < Math.abs(currentNearestNumber - number)  ){
-            currentNearestNumber = element
-        }
-    }
-    return currentNearestNumber
-}
-function GetProductsOfFiboNumber(fibonumber, isValid){
-    let productPositionOnProductsArray = productsArray.indexOf(fibonumber)
-    let productPositionOnProductsArrayIsValid = (productsArray.indexOf(fibonumber)) + 1
-
-    let firstFactor = factorsArray[productPositionOnProductsArray * 2]
-    let secondFactor = factorsArray[(productPositionOnProductsArray * 2) + 1]
-
-   
-    if (isValid){
-        return [secondFactor, firstFactor]
-    }
-}
