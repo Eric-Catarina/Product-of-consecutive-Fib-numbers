@@ -1,78 +1,28 @@
-let current = 0
-let next = 1
-let fibonumbers = []
-let productsArray = []
-let factorsArray = []
-let fibonumber
+function productFib(targetProduct){
+    let fiboIndex = 0
+    while(true){
+        let fiboFactor1 = fibonnaci(fiboIndex)
+        let fiboFactor2 = fibonnaci(fiboIndex + 1)
+        let currentFiboProduct = fiboFactor1 * fiboFactor2
 
-let count = 0
-
-function CompareNumbers(a, b) {
-    return a - b
-}
-
-
-for (let i = 0; i < 30; i++) {
-    fibonumber = next + current
-    current = next
-    next = fibonumber
-    fibonumbers.push(fibonumber)
-
-    productsArray.push(fibonumber * current)
-    factorsArray.push(fibonumber, current)
-}
-let factorsArrayWithProd = productsArray
-
-
-function ReturnTheTwoFactorsOfFalseNumber(number) {
-
-   
-
-    factorsArrayWithProd = productsArray
-    factorsArrayWithProd.push(number)
-
-    console.log("Antes do Sort: " + factorsArrayWithProd)
-
-    factorsArrayWithProd.sort(CompareNumbers)
-
-    console.log("Depois do Sort: " + factorsArrayWithProd)
-
-
-    
-    let indexOfTheProduct = factorsArrayWithProd.indexOf(number)
-    let firstFactor = (factorsArray[2 * indexOfTheProduct] )
-    let secondFactor = (factorsArray[(2 * indexOfTheProduct) + 1 ])
-
-   
-        return [secondFactor, firstFactor, false]
-
-    
-
-}
-
-function ReturnTwoFactorsOfTrueNumber(number) {
-    let indexOfTheProduct = productsArray.indexOf(number)
-
-    let firstFactor = factorsArray[(indexOfTheProduct * 2)]
-    let secondFactor = factorsArray[(indexOfTheProduct * 2) + 1]
-
-    return [secondFactor, firstFactor, true]
-}
-
-function productFib(prod) {
-    if (productsArray.includes(prod)) {
-
-        return ReturnTwoFactorsOfTrueNumber(prod)
-    }
-    else if(!(productsArray.includes(prod))) {
-        result = ReturnTheTwoFactorsOfFalseNumber(prod)
-        count ++
-
-        return result
+        if (currentFiboProduct === targetProduct){
+            return [fiboFactor1, fiboFactor2, true]
+        }
+        else if(currentFiboProduct > targetProduct){
+            return [fiboFactor1, fiboFactor2, false]
+        }
+        fiboIndex++
     }
 }
 
 
+function fibonnaci(fiboIndex){
+    if (fiboIndex <= 1){
+        return 1
+    }
+    else{
+        return fibonnaci(fiboIndex - 1 ) + fibonnaci(fiboIndex - 2)
+    }
+}
 
-
-  
+console.log(productFib(7))
